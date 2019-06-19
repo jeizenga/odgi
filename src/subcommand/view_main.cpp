@@ -61,7 +61,9 @@ int main_view(int argc, char** argv) {
     int path_counter = 0;
     auto path_start = std::chrono::system_clock::now();
     graph.for_each_path_handle([&](const path_handle_t& path_handle){
+        cerr << "got path handle " << as_integer(path_handle) << endl;
         for (handle_t handle : graph.scan_path(path_handle)) {
+            cerr << "\tat handle " << graph.get_id(handle) << (graph.get_is_reverse(handle) ? "-" : "+") << endl;
             path_counter++;
         }
     });
