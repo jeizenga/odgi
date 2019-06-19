@@ -57,6 +57,15 @@ int main_view(int argc, char** argv) {
     if (args::get(to_gfa)) {
         graph.to_gfa(std::cout);
     }
+    
+    int path_counter = 0;
+    auto path_start = std::chrono::system_clock::now();
+    graph.for_each_path_handle([&](const path_handle_t& path_handle){
+        for (handle_t handle : graph.scan_path(path_handle)) {
+            path_counter++;
+        }
+    });
+    cerr << path_counter << endl;
 
     return 0;
 }
